@@ -1,0 +1,23 @@
+[
+{
+    "model": "users.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$QGpzuq38VFIczAOQbMESX0$4scsplqmFjsVjjTAORxgjJTWYv6XEdU3uiXQqN0UWX0=",
+        "last_login": null,
+        "is_superuser": true,
+        "first_name": "Руслан",
+        "last_name": "Аляутдинов",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2024-12-27T12:39:30.315Z",
+        "email": "admin@mail.ru",
+        "username": null,
+        "phone_number": null,
+        "avatar": "",
+        "country": null,
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
