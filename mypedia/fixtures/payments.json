@@ -1,0 +1,38 @@
+[
+{
+    "model": "mypedia.payment",
+    "pk": 1,
+    "fields": {
+        "amount": 10000.0,
+        "payment_method": "cash",
+        "payment_date": "2024-12-27",
+        "owner": 5,
+        "course": null,
+        "lesson": null
+    }
+},
+{
+    "model": "mypedia.payment",
+    "pk": 2,
+    "fields": {
+        "amount": 20000.0,
+        "payment_method": "transfer_to_account",
+        "payment_date": "2024-12-25",
+        "owner": 5,
+        "course": null,
+        "lesson": null
+    }
+},
+{
+    "model": "mypedia.payment",
+    "pk": 3,
+    "fields": {
+        "amount": 5000.0,
+        "payment_method": "cash",
+        "payment_date": "2025-01-13",
+        "owner": 15,
+        "course": 3,
+        "lesson": null
+    }
+}
+]

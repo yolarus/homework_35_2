@@ -1,10 +1,12 @@
+from django.contrib.auth.models import Group
 from rest_framework import generics, viewsets
-from rest_framework. permissions import IsAdminUser, IsAuthenticated
+from rest_framework.permissions import IsAdminUser
+
+from src.utils import get_queryset_for_owner
+from users.permissions import IsModerator, IsOwner
+
 from .models import Course, Lesson
 from .serializers import CourseSerializer, LessonSerializer, StaffCourseSerializer
-from users.permissions import IsModerator, IsOwner
-from src.utils import get_queryset_for_owner
-from django.contrib.auth.models import Group
 
 
 # Create your views here.

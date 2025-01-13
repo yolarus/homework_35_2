@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
-from .models import User
-
 from mypedia.serializers import PaymentSerializer
+
+from .models import User
 
 
 class NewUserSerializer(serializers.ModelSerializer):

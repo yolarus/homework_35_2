@@ -4,7 +4,7 @@
     "pk": 5,
     "fields": {
         "password": "pbkdf2_sha256$870000$QGpzuq38VFIczAOQbMESX0$4scsplqmFjsVjjTAORxgjJTWYv6XEdU3uiXQqN0UWX0=",
-        "last_login": null,
+        "last_login": "2025-01-13T07:00:28.446Z",
         "is_superuser": true,
         "first_name": "Руслан",
         "last_name": "Аляутдинов",
@@ -12,11 +12,55 @@
         "is_active": true,
         "date_joined": "2024-12-27T12:39:30.315Z",
         "email": "admin@mail.ru",
-        "username": null,
+        "username": "admin",
         "phone_number": null,
         "avatar": "",
         "country": null,
         "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 15,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$nZXVxW6Zu10mGHYfKYGtE5$SbYNbE2fy68KAlzB+A9D293ZUoMfgboelt8nFPI96go=",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-01-13T06:55:42Z",
+        "email": "test@mail.ru",
+        "username": "test",
+        "phone_number": null,
+        "avatar": "",
+        "country": "Россия",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 16,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$FjyTrOXP5v011uIOODlv5K$9MZirahMERLSm9eyQmrQZ/31cbAwvWwZVkCoxqWeUPY=",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-01-13T07:20:28Z",
+        "email": "moderator@mail.ru",
+        "username": "moderator",
+        "phone_number": null,
+        "avatar": "",
+        "country": null,
+        "groups": [
+            1
+        ],
         "user_permissions": []
     }
 }

@@ -1,0 +1,82 @@
+[
+{
+    "model": "mypedia.course",
+    "pk": 1,
+    "fields": {
+        "name": "Математика",
+        "preview": "",
+        "description": "Очень интересный курс",
+        "owner": null
+    }
+},
+{
+    "model": "mypedia.course",
+    "pk": 3,
+    "fields": {
+        "name": "Физика",
+        "preview": "",
+        "description": "Удивительная наука",
+        "owner": 15
+    }
+},
+{
+    "model": "mypedia.lesson",
+    "pk": 1,
+    "fields": {
+        "name": "Математика 1",
+        "preview": "",
+        "description": "Первый урок по математике",
+        "video_link": "",
+        "course": 1,
+        "owner": null
+    }
+},
+{
+    "model": "mypedia.lesson",
+    "pk": 4,
+    "fields": {
+        "name": "Математика 2",
+        "preview": "",
+        "description": "Второй урок по математике",
+        "video_link": "",
+        "course": 1,
+        "owner": null
+    }
+},
+{
+    "model": "mypedia.lesson",
+    "pk": 5,
+    "fields": {
+        "name": "Физика 1",
+        "preview": "",
+        "description": "Первый урок по физике",
+        "video_link": null,
+        "course": 3,
+        "owner": 15
+    }
+},
+{
+    "model": "mypedia.lesson",
+    "pk": 7,
+    "fields": {
+        "name": "Физика 2",
+        "preview": "",
+        "description": "Второй урок по физике",
+        "video_link": null,
+        "course": 3,
+        "owner": 15
+    }
+},
+{
+    "model": "mypedia.payment",
+    "pk": 1,
+    "fields": {
+        "amount": 10000.0,
+        "payment_method": "cash",
+        "payment_date": "2024-12-27",
+        "owner": 5,
+        "course": null,
+        "lesson": null
+    }
+}
+]

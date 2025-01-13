@@ -2,13 +2,14 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import AllowAny, IsAdminUser
-from .models import User
+
 from mypedia.models import Payment
 from mypedia.serializers import PaymentSerializer
-
-from .serializers import UserDetailSerializer, UserSerializer, NewUserSerializer
-from .permissions import IsModerator, IsCurrentUser, IsOwner
 from src.utils import get_queryset_for_owner
+
+from .models import User
+from .permissions import IsCurrentUser, IsModerator, IsOwner
+from .serializers import NewUserSerializer, UserDetailSerializer, UserSerializer
 
 
 # Create your views here.
