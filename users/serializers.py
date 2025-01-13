@@ -1,15 +1,8 @@
 from rest_framework import serializers
 
-from .models import Payment, User
+from .models import User
 
-
-class PaymentSerializer(serializers.ModelSerializer):
-    """
-    Сериализатор для списка объектов модели Payment
-    """
-    class Meta:
-        model = Payment
-        fields = "__all__"
+from mypedia.serializers import PaymentSerializer
 
 
 class UserSerializer(serializers.ModelSerializer):

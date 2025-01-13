@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Course, Lesson
+from .models import Course, Lesson, Payment
 
 
 class LessonSerializer(serializers.ModelSerializer):
@@ -18,7 +18,7 @@ class CourseSerializer(serializers.ModelSerializer):
     """
 
     lessons_count = serializers.SerializerMethodField()
-    course_lessons = LessonSerializer(source="lessons", many=True)
+    course_lessons = serializers.SerializerMethodField()
 
     class Meta:
         model = Course
@@ -29,3 +29,26 @@ class CourseSerializer(serializers.ModelSerializer):
         Подсчет количества уроков в курсе
         """
         return Lesson.objects.filter(course=obj).count()
+
+    def get_course_lessons(self, obj):
+        """
+        Список уроков в курсе
+        """
+        return [lesson.id for lesson in Lesson.objects.filter(course=obj)]
+
+
+class StaffCourseSerializer(CourseSerializer):
+    """
+    Сериализатор для модели Course, отображающийся модератору и админу
+    """
+    lessons_count = serializers.SerializerMethodField()
+    course_lessons = LessonSerializer(source="lessons", many=True, read_only=True)
+
+
+class PaymentSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для списка объектов модели Payment
+    """
+    class Meta:
+        model = Payment
+        fields = "__all__"

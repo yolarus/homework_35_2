@@ -2,7 +2,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
-from .models import Payment, User
+from .models import User
+from mypedia.models import Payment
+
 from .serializers import PaymentSerializer, UserDetailSerializer, UserSerializer
 from .permissions import IsModerator
 
@@ -17,7 +19,7 @@ class UserListCreateAPIView(generics.ListCreateAPIView):
 
     def get_permissions(self):
         """
-        Проверка разрешений в зависимости от HTTP-запроса
+        Выдача разрешений в зависимости от статуса пользователя
         """
         if self.request.method == "POST":
             self.permission_classes = [AllowAny]
