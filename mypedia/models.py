@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-
 PAYMENT_METHODS = [("cash", "Наличные"),
                    ("transfer_to_account", "Перевод на счет")]
 
@@ -66,12 +65,12 @@ class Payment(models.Model):
     payment_method = models.CharField(max_length=25, choices=PAYMENT_METHODS, verbose_name="Способ оплаты")
     payment_date = models.DateField(auto_now_add=True, verbose_name="Дата платежа")
 
-    user = models.ForeignKey(get_user_model(),
-                             on_delete=models.CASCADE,
-                             verbose_name="Пользователь",
-                             null=True,
-                             blank=True,
-                             related_name="payments")
+    owner = models.ForeignKey(get_user_model(),
+                              on_delete=models.CASCADE,
+                              verbose_name="Пользователь",
+                              null=True,
+                              blank=True,
+                              related_name="payments")
     course = models.ForeignKey(Course,
                                on_delete=models.CASCADE,
                                verbose_name="Оплаченный курс",
