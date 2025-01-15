@@ -1,13 +1,16 @@
 from rest_framework import serializers
 
 from .models import Course, Lesson, Payment
+from .validators import YoutubeLinkValidator
 
 
 class LessonSerializer(serializers.ModelSerializer):
     """
     Сериализатор для модели Lesson
     """
+
     class Meta:
+        validators = [YoutubeLinkValidator(field="video_link")]
         model = Lesson
         fields = "__all__"
 

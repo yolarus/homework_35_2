@@ -90,3 +90,31 @@ class Payment(models.Model):
 
     def __str__(self):
         return f"Платеж №{self.pk} от {self.payment_date} - {self.amount} руб."
+
+
+class Subscription(models.Model):
+    """
+    Модель подписки на курс сервиса
+    """
+
+    is_active = models.BooleanField(verbose_name="Активна", default=True)
+    owner = models.ForeignKey(get_user_model(),
+                              on_delete=models.CASCADE,
+                              verbose_name="Пользователь",
+                              null=True,
+                              blank=True,
+                              related_name="subscriptions")
+    course = models.ForeignKey(Course,
+                               on_delete=models.CASCADE,
+                               verbose_name="Курс",
+                               null=True,
+                               blank=True,
+                               related_name="subscriptions")
+    created_at = models.DateField(verbose_name="Дата активации", auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Подписка"
+        verbose_name_plural = "Подписки"
+
+    def __str__(self):
+        return f"Подписка пользователя {self.owner.name} на курс {self.course.name} от {self.created_at}"
