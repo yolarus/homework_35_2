@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Course, Lesson, Payment
+from .models import Course, Lesson, Payment, Subscription
 from .validators import YoutubeLinkValidator
 
 
@@ -15,6 +15,16 @@ class LessonSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class SubscriptionSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для модели Subscription
+    """
+
+    class Meta:
+        model = Subscription
+        fields = "__all__"
+
+
 class CourseSerializer(serializers.ModelSerializer):
     """
     Сериализатор для модели Course
@@ -22,6 +32,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
     lessons_count = serializers.SerializerMethodField()
     course_lessons = serializers.SerializerMethodField()
+    is_subscribed = serializers.SerializerMethodField()
 
     class Meta:
         model = Course
@@ -38,6 +49,15 @@ class CourseSerializer(serializers.ModelSerializer):
         Список уроков в курсе
         """
         return [lesson.id for lesson in Lesson.objects.filter(course=obj)]
+
+    def get_is_subscribed(self, obj):
+        """
+        Проверка, подписан ли пользователь на курс
+        """
+        if Subscription.objects.filter(owner=self.context["request"].user, course=obj).exists():
+            return "Вы подписаны"
+        else:
+            return "Вы еще не подписаны"
 
 
 class StaffCourseSerializer(CourseSerializer):

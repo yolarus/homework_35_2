@@ -101,14 +101,10 @@ class Subscription(models.Model):
     owner = models.ForeignKey(get_user_model(),
                               on_delete=models.CASCADE,
                               verbose_name="Пользователь",
-                              null=True,
-                              blank=True,
                               related_name="subscriptions")
     course = models.ForeignKey(Course,
                                on_delete=models.CASCADE,
                                verbose_name="Курс",
-                               null=True,
-                               blank=True,
                                related_name="subscriptions")
     created_at = models.DateField(verbose_name="Дата активации", auto_now_add=True)
 
