@@ -37,7 +37,7 @@ class Lesson(models.Model):
     description = models.TextField(verbose_name="Описание", blank=True, null=True)
     video_link = models.TextField(verbose_name="Ссылка на видео", blank=True, null=True)
     course = models.ForeignKey(Course,
-                               on_delete=models.PROTECT,
+                               on_delete=models.CASCADE,
                                verbose_name="Курс",
                                null=True,
                                blank=True,
