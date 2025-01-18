@@ -107,8 +107,8 @@ class PaymentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView)
         """
         Выдача разрешений в зависимости от статуса пользователя
         """
-        if self.request.method in ["PATCH", "PUT", "GET"]:
+        if self.request.method == "GET":
             self.permission_classes = [IsOwner | IsModerator | IsAdminUser]
-        elif self.request.method == "DELETE":
-            self.permission_classes = [IsOwner | IsAdminUser]
+        elif self.request.method in ["PATCH", "PUT", "DELETE"]:
+            self.permission_classes = [IsModerator | IsAdminUser]
         return super().get_permissions()

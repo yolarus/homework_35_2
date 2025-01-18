@@ -3,7 +3,7 @@ from django.urls import reverse
 from rest_framework import status
 
 from django.contrib.auth.models import Group
-from .models import Lesson, Course, Payment, Subscription
+from .models import Lesson, Course, Subscription
 from users.models import User
 from rest_framework.exceptions import ValidationError
 
@@ -19,8 +19,8 @@ class LessonTestCase(APITestCase):
         Подготовка исходных данных
         """
 
-        self.user = User.objects.create(email="test@email.com", password="12345")
-        self.moderator = User.objects.create(email="moderator@email.com", password="12345")
+        self.user = User.objects.create(email="test@email.com")
+        self.moderator = User.objects.create(email="moderator@email.com")
         group = Group.objects.create(name="Moderators")
         self.moderator.groups.add(group)
 
@@ -223,8 +223,8 @@ class CourseSubscriptionTestCase(APITestCase):
         Подготовка исходных данных
         """
 
-        self.user = User.objects.create(email="test@email.com", password="12345")
-        self.moderator = User.objects.create(email="moderator@email.com", password="12345")
+        self.user = User.objects.create(email="test@email.com")
+        self.moderator = User.objects.create(email="moderator@email.com")
         group = Group.objects.create(name="Moderators")
         self.moderator.groups.add(group)
 
