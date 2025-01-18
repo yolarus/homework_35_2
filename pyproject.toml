@@ -38,3 +38,6 @@ line-length = 119
 
 [tool.isort]
 line_length = 119
+
+[tool.coverage.run]
+omit = ["__init__.py", "*/migrations/*", "config/*", "apps.py", "admin.py", "manage.py"]
