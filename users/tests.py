@@ -1,10 +1,11 @@
-from rest_framework.test import APITestCase
+from django.contrib.auth.models import Group
 from django.urls import reverse
 from rest_framework import status
+from rest_framework.test import APITestCase
 
-from django.contrib.auth.models import Group
+from mypedia.models import Course, Lesson, Payment
+
 from .models import User
-from mypedia.models import Payment, Course, Lesson
 
 
 # Create your tests here.
@@ -147,7 +148,7 @@ class UserTestCase(APITestCase):
         response = self.client.patch(url, data)
 
         with self.assertRaises(KeyError):  # данные не обработаются сериализатором
-            error = response.json()["phone_number"]
+            response.json()["phone_number"]
 
         # Админ - конфиденциальные данные
         self.client.force_authenticate(self.admin)

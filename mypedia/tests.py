@@ -1,11 +1,12 @@
-from rest_framework.test import APITestCase
+from django.contrib.auth.models import Group
 from django.urls import reverse
 from rest_framework import status
-
-from django.contrib.auth.models import Group
-from .models import Lesson, Course, Subscription
-from users.models import User
 from rest_framework.exceptions import ValidationError
+from rest_framework.test import APITestCase
+
+from users.models import User
+
+from .models import Course, Lesson, Subscription
 
 
 # Create your tests here.
@@ -24,7 +25,9 @@ class LessonTestCase(APITestCase):
         group = Group.objects.create(name="Moderators")
         self.moderator.groups.add(group)
 
-        self.lesson = Lesson.objects.create(name="Тестовый урок 1", description="Первый тестовый урок", owner=self.user)
+        self.lesson = Lesson.objects.create(name="Тестовый урок 1",
+                                            description="Первый тестовый урок",
+                                            owner=self.user)
         self.lesson_2 = Lesson.objects.create(name="Тестовый урок 2", description="Второй тестовый урок")
         self.client.force_authenticate(self.user)
 
@@ -228,7 +231,9 @@ class CourseSubscriptionTestCase(APITestCase):
         group = Group.objects.create(name="Moderators")
         self.moderator.groups.add(group)
 
-        self.course = Course.objects.create(name="Тестовый курс 1", description="Первый тестовый курс", owner=self.user)
+        self.course = Course.objects.create(name="Тестовый курс 1",
+                                            description="Первый тестовый курс",
+                                            owner=self.user)
         self.course_2 = Course.objects.create(name="Тестовый курс 2", description="Второй тестовый курс")
 
         self.lesson = Lesson.objects.create(name="Тестовый урок 1",

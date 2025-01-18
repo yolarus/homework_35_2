@@ -1,7 +1,7 @@
 from django.core.management import call_command
 from django.core.management.base import BaseCommand
 
-from mypedia.models import Course, Lesson, Payment
+from mypedia.models import Course, Lesson, Payment, Subscription
 
 
 class Command(BaseCommand):
@@ -12,6 +12,7 @@ class Command(BaseCommand):
     def handle(self, *args: list, **kwargs: dict) -> None:
 
         Payment.objects.all().delete()
+        Subscription.objects.all().delete()
         Lesson.objects.all().delete()
         Course.objects.all().delete()
 
