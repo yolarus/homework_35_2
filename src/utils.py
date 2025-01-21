@@ -1,7 +1,7 @@
-from django.contrib.auth.models import Group
-from config.settings import STRIPE_API_KEY
-
 import stripe
+from django.contrib.auth.models import Group
+
+from config.settings import STRIPE_API_KEY
 
 stripe.api_key = STRIPE_API_KEY
 
@@ -32,7 +32,7 @@ def create_stripe_price(instance):
     """
     return stripe.Price.create(
         currency="rub",
-        unit_amount=instance.amount*100,
+        unit_amount=instance.amount * 100,
         product=create_stripe_product(instance),
     )
 

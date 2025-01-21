@@ -5,7 +5,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 
 from mypedia.models import Payment
 from mypedia.serializers import PaymentSerializer
-from src.utils import get_queryset_for_owner, create_stripe_session, create_stripe_price, check_session_status
+from src.utils import check_session_status, create_stripe_price, create_stripe_session, get_queryset_for_owner
 
 from .models import User
 from .permissions import IsCurrentUser, IsModerator, IsOwner
@@ -123,7 +123,7 @@ class PaymentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView)
         Уточнение статуса для неоплаченного платежа при обращении к объекту
         """
         payment = super().get_object()
-        if payment.status == "unpaid":
+        if payment.session_id and payment.status == "unpaid":
             payment.status = check_session_status(payment.session_id)
             payment.save()
         return payment

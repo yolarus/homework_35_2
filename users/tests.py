@@ -282,6 +282,9 @@ class PaymentTestCase(APITestCase):
                   'amount': self.payment.amount,
                   'payment_method': self.payment.payment_method,
                   'payment_date': self.payment.payment_date.isoformat(),
+                  'link': self.payment.link,
+                  'session_id': self.payment.session_id,
+                  'status': self.payment.status,
                   'owner': self.payment.owner.pk,
                   'course': self.payment.course.pk,
                   'lesson': None}
@@ -304,6 +307,9 @@ class PaymentTestCase(APITestCase):
                   'amount': self.payment.amount,
                   'payment_method': self.payment.payment_method,
                   'payment_date': self.payment.payment_date.isoformat(),
+                  'link': self.payment.link,
+                  'session_id': self.payment.session_id,
+                  'status': self.payment.status,
                   'owner': self.payment.owner.pk,
                   'course': self.payment.course.pk,
                   'lesson': None}
@@ -313,7 +319,7 @@ class PaymentTestCase(APITestCase):
 
     def test_payment_create(self):
         """
-        Тест создания объекта Payment и автоматического заполнения поля owner
+        Тест создания объекта Payment, автоматического заполнения поля owner и создания платежа в stripe
         """
 
         url = reverse("users:payments")
@@ -326,6 +332,7 @@ class PaymentTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.json()["owner"], self.user.pk)
+        self.assertTrue(all([response.json().get("link"), response.json().get("session_id")]))
         self.assertEqual(Payment.objects.all().count(), 3)
 
     def test_payment_update(self):
@@ -374,7 +381,7 @@ class PaymentTestCase(APITestCase):
 
     def test_payment_list(self):
         """
-        Тест вывода списка объектов Paymnet
+        Тест вывода списка объектов Payment
         """
 
         # Обычный пользователь
@@ -385,6 +392,9 @@ class PaymentTestCase(APITestCase):
                    'amount': self.payment.amount,
                    'payment_method': self.payment.payment_method,
                    'payment_date': self.payment.payment_date.isoformat(),
+                   'link': self.payment.link,
+                   'session_id': self.payment.session_id,
+                   'status': self.payment.status,
                    'owner': self.payment.owner.pk,
                    'course': self.payment.course.pk,
                    'lesson': None}]
@@ -402,6 +412,9 @@ class PaymentTestCase(APITestCase):
                    'amount': self.payment.amount,
                    'payment_method': self.payment.payment_method,
                    'payment_date': self.payment.payment_date.isoformat(),
+                   'link': self.payment.link,
+                   'session_id': self.payment.session_id,
+                   'status': self.payment.status,
                    'owner': self.payment.owner.pk,
                    'course': self.payment.course.pk,
                    'lesson': None},
@@ -409,6 +422,9 @@ class PaymentTestCase(APITestCase):
                    'amount': self.payment_2.amount,
                    'payment_method': self.payment_2.payment_method,
                    'payment_date': self.payment_2.payment_date.isoformat(),
+                   'link': self.payment_2.link,
+                   'session_id': self.payment_2.session_id,
+                   'status': self.payment_2.status,
                    'owner': None,
                    'course': None,
                    'lesson': self.payment_2.lesson.pk}]
