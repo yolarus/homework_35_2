@@ -61,7 +61,7 @@ class Payment(models.Model):
     """
     Модель платежей сервиса
     """
-    amount = models.FloatField(verbose_name="Сумма оплаты")
+    amount = models.PositiveIntegerField(verbose_name="Сумма оплаты")
     payment_method = models.CharField(max_length=25, choices=PAYMENT_METHODS, verbose_name="Способ оплаты")
     payment_date = models.DateField(auto_now_add=True, verbose_name="Дата платежа")
 
@@ -83,6 +83,18 @@ class Payment(models.Model):
                                null=True,
                                blank=True,
                                related_name="payments")
+
+    link = models.CharField(max_length=400,
+                            blank=True,
+                            null=True,
+                            verbose_name="Ссылка на оплату")
+
+    session_id = models.CharField(max_length=255,
+                                  blank=True,
+                                  null=True,
+                                  verbose_name="ID сессии")
+
+    status = models.CharField(max_length=50, verbose_name="Статус", default="unpaid")
 
     class Meta:
         verbose_name = "Платеж"

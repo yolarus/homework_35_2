@@ -5,7 +5,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 
 from mypedia.models import Payment
 from mypedia.serializers import PaymentSerializer
-from src.utils import get_queryset_for_owner
+from src.utils import get_queryset_for_owner, create_stripe_session, create_stripe_price, check_session_status
 
 from .models import User
 from .permissions import IsCurrentUser, IsModerator, IsOwner
@@ -93,6 +93,11 @@ class PaymentListCreateAPIView(generics.ListCreateAPIView):
         """
         payment = serializer.save()
         payment.owner = self.request.user
+        price = create_stripe_price(payment)
+
+        session_id, payment_link = create_stripe_session(price)
+        payment.session_id = session_id
+        payment.link = payment_link
         payment.save()
 
 
@@ -112,3 +117,13 @@ class PaymentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView)
         elif self.request.method in ["PATCH", "PUT", "DELETE"]:
             self.permission_classes = [IsModerator | IsAdminUser]
         return super().get_permissions()
+
+    def get_object(self):
+        """
+        Уточнение статуса для неоплаченного платежа при обращении к объекту
+        """
+        payment = super().get_object()
+        if payment.status == "unpaid":
+            payment.status = check_session_status(payment.session_id)
+            payment.save()
+        return payment
