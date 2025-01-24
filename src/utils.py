@@ -33,7 +33,7 @@ def create_stripe_price(instance):
     return stripe.Price.create(
         currency="rub",
         unit_amount=instance.amount * 100,
-        product=create_stripe_product(instance),
+        product=create_stripe_product(instance).get("id"),
     )
 
 
