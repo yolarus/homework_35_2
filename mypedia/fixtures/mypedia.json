@@ -6,7 +6,8 @@
         "name": "Математика",
         "preview": "",
         "description": "Очень интересный курс",
-        "owner": null
+        "owner": null,
+        "updated_at": "2025-01-27T10:29:32.295Z"
     }
 },
 {
@@ -15,8 +16,9 @@
     "fields": {
         "name": "Физика",
         "preview": "",
-        "description": "Удивительная наука",
-        "owner": 15
+        "description": "Тест отправки уведомления",
+        "owner": 15,
+        "updated_at": "2025-01-27T13:48:43.905Z"
     }
 },
 {
@@ -28,7 +30,8 @@
         "description": "Первый урок по математике",
         "video_link": "",
         "course": 1,
-        "owner": null
+        "owner": null,
+        "updated_at": "2025-01-27T10:29:32.304Z"
     }
 },
 {
@@ -40,7 +43,8 @@
         "description": "Второй урок по математике",
         "video_link": "",
         "course": 1,
-        "owner": null
+        "owner": null,
+        "updated_at": "2025-01-27T10:29:32.304Z"
     }
 },
 {
@@ -52,7 +56,8 @@
         "description": "Первый урок по физике",
         "video_link": null,
         "course": 3,
-        "owner": 15
+        "owner": 15,
+        "updated_at": "2025-01-27T10:29:32.304Z"
     }
 },
 {
@@ -64,7 +69,8 @@
         "description": "Второй урок по физике",
         "video_link": null,
         "course": 3,
-        "owner": 15
+        "owner": 15,
+        "updated_at": "2025-01-27T10:29:32.304Z"
     }
 },
 {
@@ -76,7 +82,21 @@
         "description": "Третий урок по математике",
         "video_link": null,
         "course": null,
-        "owner": 5
+        "owner": 5,
+        "updated_at": "2025-01-27T10:29:32.304Z"
+    }
+},
+{
+    "model": "mypedia.lesson",
+    "pk": 9,
+    "fields": {
+        "name": "Физика 3",
+        "preview": "",
+        "description": "Третий урок по физике",
+        "video_link": null,
+        "course": 3,
+        "owner": 5,
+        "updated_at": "2025-01-27T13:54:15.391Z"
     }
 },
 {

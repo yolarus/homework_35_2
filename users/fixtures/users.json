@@ -4,7 +4,7 @@
     "pk": 5,
     "fields": {
         "password": "pbkdf2_sha256$870000$QGpzuq38VFIczAOQbMESX0$4scsplqmFjsVjjTAORxgjJTWYv6XEdU3uiXQqN0UWX0=",
-        "last_login": "2025-01-13T07:00:28.446Z",
+        "last_login": "2025-01-27T11:01:06.607Z",
         "is_superuser": true,
         "first_name": "Руслан",
         "last_name": "Аляутдинов",
@@ -25,14 +25,14 @@
     "pk": 15,
     "fields": {
         "password": "pbkdf2_sha256$870000$nZXVxW6Zu10mGHYfKYGtE5$SbYNbE2fy68KAlzB+A9D293ZUoMfgboelt8nFPI96go=",
-        "last_login": null,
+        "last_login": "2025-01-27T12:32:34Z",
         "is_superuser": false,
         "first_name": "",
         "last_name": "",
         "is_staff": false,
         "is_active": true,
         "date_joined": "2025-01-13T06:55:42Z",
-        "email": "test@mail.ru",
+        "email": "rusalyautdinov@yandex.ru",
         "username": "test",
         "phone_number": null,
         "avatar": "",
@@ -46,14 +46,14 @@
     "pk": 16,
     "fields": {
         "password": "pbkdf2_sha256$870000$FjyTrOXP5v011uIOODlv5K$9MZirahMERLSm9eyQmrQZ/31cbAwvWwZVkCoxqWeUPY=",
-        "last_login": null,
+        "last_login": "2024-12-27T12:32:10Z",
         "is_superuser": false,
         "first_name": "",
         "last_name": "",
         "is_staff": false,
         "is_active": true,
         "date_joined": "2025-01-13T07:20:28Z",
-        "email": "moderator@mail.ru",
+        "email": "drakon507@yandex.ru",
         "username": "moderator",
         "phone_number": null,
         "avatar": "",
@@ -61,6 +61,27 @@
         "groups": [
             1
         ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 18,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$CgTa9TrH92f7wOnySaZKK8$hmO/h/jhW+yseaCiiLD9TjkzTWR0FoF3Z3W4KTBdCyQ=",
+        "last_login": "2025-01-27T12:58:18.980Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-01-27T12:35:58.420Z",
+        "email": "new_user@mail.ru",
+        "username": null,
+        "phone_number": null,
+        "avatar": "",
+        "country": null,
+        "groups": [],
         "user_permissions": []
     }
 }
