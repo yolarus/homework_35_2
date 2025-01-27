@@ -19,6 +19,7 @@ class Course(models.Model):
                               null=True,
                               blank=True,
                               related_name="courses")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
 
     class Meta:
         verbose_name = "Курс"
@@ -48,6 +49,7 @@ class Lesson(models.Model):
                               null=True,
                               blank=True,
                               related_name="lessons")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
 
     class Meta:
         verbose_name = "Урок"

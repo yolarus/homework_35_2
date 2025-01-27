@@ -182,9 +182,4 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_BROKER_URL = getenv("CELERY_BROKER_URL")
 CELERY_RESULT_BACKEND = getenv("CELERY_RESULT_BACKEND")
-CELERY_BEAT_SCHEDULER = "django_celery_beat. schedulers:DatabaseScheduler"
-
-# CELERY_BEAT_SCHEDULE = {
-#     'send_congratulations': {
-#         'task': 'dogs.tasks.send_congratulations',
-#         'schedule': timedelta(days=1)}}
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
