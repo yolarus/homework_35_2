@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "django_filters",
     "drf_yasg",
+    "django_celery_beat",
 
     "users",
     "mypedia",
@@ -167,3 +168,23 @@ SWAGGER_SETTINGS = {
         }
     },
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = getenv("EMAIL_HOST")
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_PORT = getenv("EMAIL_PORT")
+EMAIL_HOST_USER = getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = getenv("EMAIL_HOST_PASSWORD")
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_BROKER_URL = getenv("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = getenv("CELERY_RESULT_BACKEND")
+CELERY_BEAT_SCHEDULER = "django_celery_beat. schedulers:DatabaseScheduler"
+
+# CELERY_BEAT_SCHEDULE = {
+#     'send_congratulations': {
+#         'task': 'dogs.tasks.send_congratulations',
+#         'schedule': timedelta(days=1)}}
