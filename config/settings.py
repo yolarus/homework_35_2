@@ -183,3 +183,9 @@ CELERY_TIMEZONE = TIME_ZONE
 CELERY_BROKER_URL = getenv("CELERY_BROKER_URL")
 CELERY_RESULT_BACKEND = getenv("CELERY_RESULT_BACKEND")
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+
+
+CELERY_BEAT_SCHEDULE = {
+    'block_inactive_users': {
+        'task': 'users.tasks.block_inactive_users',
+        'schedule': timedelta(days=1)}}

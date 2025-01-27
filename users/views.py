@@ -1,7 +1,11 @@
+from django.utils import timezone
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.request import Request
+from rest_framework.response import Response
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from mypedia.models import Payment
 from mypedia.serializers import PaymentSerializer
@@ -127,3 +131,20 @@ class PaymentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView)
             payment.status = check_session_status(payment.session_id)
             payment.save()
         return payment
+
+
+class MyToken(TokenObtainPairView):
+    """
+    Представление для получения токенов авторизации
+    """
+    permission_classes = [AllowAny]
+
+    def post(self, request: Request, *args, **kwargs) -> Response:
+        """
+        Заполнение поля last_login при получении токенов авторизации
+        """
+        result = super().post(request, *args, **kwargs)
+        user = User.objects.get(email=request.data["email"])
+        user.last_login = timezone.now()
+        user.save()
+        return result
