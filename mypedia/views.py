@@ -98,10 +98,11 @@ class LessonListCreateAPIView(generics.ListCreateAPIView):
         lesson.save()
 
         course = lesson.course
-        previous_update_date = course.updated_at
-        current_update_date = lesson.updated_at
-        if (current_update_date - previous_update_date).seconds >= 4 * 60 * 60:
-            send_message_about_course_update.delay(course.pk)
+        if course:
+            previous_update_date = course.updated_at
+            current_update_date = lesson.updated_at
+            if (current_update_date - previous_update_date).seconds >= 4 * 60 * 60:
+                send_message_about_course_update.delay(course.pk)
 
 
 class LessonRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
@@ -128,10 +129,11 @@ class LessonRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
         lesson = serializer.save()
 
         course = lesson.course
-        previous_update_date = course.updated_at
-        current_update_date = lesson.updated_at
-        if (current_update_date - previous_update_date).seconds >= 4 * 60 * 60:
-            send_message_about_course_update.delay(course.pk)
+        if course:
+            previous_update_date = course.updated_at
+            current_update_date = lesson.updated_at
+            if (current_update_date - previous_update_date).seconds >= 4 * 60 * 60:
+                send_message_about_course_update.delay(course.pk)
 
 
 class SubscriptionListCreateAPIView(generics.ListCreateAPIView):

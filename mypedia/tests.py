@@ -172,7 +172,6 @@ class LessonTestCase(APITestCase):
         data = response.json()
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
         result = {'count': 1,
                   'next': None,
                   'previous': None,
@@ -181,6 +180,7 @@ class LessonTestCase(APITestCase):
                                'preview': self.lesson.preview,
                                'description': self.lesson.description,
                                'video_link': self.lesson.video_link,
+                               'updated_at': self.lesson.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                                'course': None,
                                'owner': self.lesson.owner.pk}]}
 
@@ -191,7 +191,6 @@ class LessonTestCase(APITestCase):
         url = reverse("mypedia:lessons")
         response = self.client.get(url)
         data = response.json()
-
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         result = {'count': 2,
@@ -202,6 +201,7 @@ class LessonTestCase(APITestCase):
                                'preview': self.lesson.preview,
                                'description': self.lesson.description,
                                'video_link': self.lesson.video_link,
+                               'updated_at': self.lesson.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                                'course': None,
                                'owner': self.lesson.owner.pk},
                               {'id': self.lesson_2.pk,
@@ -209,6 +209,7 @@ class LessonTestCase(APITestCase):
                                'preview': self.lesson_2.preview,
                                'description': self.lesson_2.description,
                                'video_link': self.lesson_2.video_link,
+                               'updated_at': self.lesson_2.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                                'course': None,
                                'owner': None}
                               ]}
@@ -526,6 +527,7 @@ class CourseSubscriptionTestCase(APITestCase):
                                'is_subscribed': 'Вы подписаны',
                                'name': self.course.name,
                                'preview': None,
+                               'updated_at': self.course.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                                'description': self.course.description,
                                'owner': self.course.owner.pk}]}
 
@@ -544,24 +546,28 @@ class CourseSubscriptionTestCase(APITestCase):
                                'lessons_count': 1,
                                'course_lessons': [{'id': self.lesson.pk,
                                                    'name': self.lesson.name,
-                                                   'preview': None,
+                                                   'preview': self.lesson.preview,
                                                    'description': self.lesson.description,
                                                    'video_link': None,
+                                                   'updated_at': self.lesson.updated_at.strftime(
+                                                       "%Y-%m-%dT%H:%M:%S.%fZ"),
                                                    'course': self.lesson.course.pk,
                                                    'owner': self.lesson.owner.pk
                                                    }],
                                'is_subscribed': 'Вы еще не подписаны',
                                'name': self.course.name,
-                               'preview': None,
+                               'preview': self.course.preview,
                                'description': self.course.description,
+                               'updated_at': self.course.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                                'owner': self.course.owner.pk},
                               {'id': self.course_2.pk,
                                'lessons_count': 0,
                                'course_lessons': [],
                                'is_subscribed': 'Вы подписаны',
                                'name': self.course_2.name,
-                               'preview': None,
+                               'preview': self.course_2.preview,
                                'description': self.course_2.description,
+                               'updated_at': self.course_2.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
                                'owner': None}
                               ]}
 
