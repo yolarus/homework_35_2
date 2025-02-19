@@ -1,0 +1,107 @@
+version: '3.13'
+services:
+
+  mypedia:
+    container_name: mypedia
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: ./docker_commands.sh
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env
+    depends_on:
+      db_mypedia:
+        condition: service_healthy
+      celery:
+        condition: service_started
+      celery_beat:
+        condition: service_started
+    networks:
+      - local
+      - global
+
+  db_mypedia:
+    container_name: db_mypedia
+    image: postgres:16.4
+    env_file:
+      - ./.env
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 10s
+      timeout: 20s
+      retries: 3
+    networks:
+      - local
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: on-failure
+    volumes:
+      - redis:/var/lib/redis/data
+    expose:
+      - "6379"
+    ports:
+      - "6379:6379"
+    networks:
+      - local
+
+  celery:
+    container_name: celery
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: on-failure
+    env_file:
+      - ./.env
+    volumes:
+      - .:/code
+    command: bash -c "celery -A config worker -l INFO -S django"
+    depends_on:
+      - redis
+    networks:
+      - local
+      - global
+
+  celery_beat:
+    container_name: celery_beat
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: on-failure
+    env_file:
+      - ./.env
+    volumes:
+      - .:/code
+    command: bash -c "celery -A config beat -l info -S django"
+    depends_on:
+      - redis
+    networks:
+      - local
+
+volumes:
+  mypedia:
+    driver: local
+  db_mypedia:
+    driver: local
+  redis:
+
+networks:
+  local:
+    driver: bridge
+    internal: true
+  global:
+    driver: bridge
+    internal: false

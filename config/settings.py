@@ -30,7 +30,8 @@ SECRET_KEY = getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if getenv("DEBUG") == "True" else False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0',
+                 'localhost']
 
 
 # Application definition
@@ -90,11 +91,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": 'django.db.backends.postgresql_psycopg2',
-        'NAME': getenv("NAME"),
-        'USER': getenv("USER"),
-        'PASSWORD': getenv("PASSWORD"),
-        'HOST': getenv("HOST"),
-        'PORT': getenv("PORT")
+        'NAME': getenv("DB_NAME"),
+        'USER': getenv("DB_USER"),
+        'PASSWORD': getenv("DB_PASSWORD"),
+        'HOST': getenv("DB_HOST"),
+        'PORT': getenv("DB_PORT")
     }
 }
 
