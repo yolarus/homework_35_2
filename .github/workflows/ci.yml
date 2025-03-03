@@ -45,6 +45,9 @@ jobs:
       - name: Run tests
         run: |
           python manage.py test
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
     
   build:
     needs: test
