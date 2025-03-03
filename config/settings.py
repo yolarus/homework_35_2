@@ -9,8 +9,9 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+import sys
 from datetime import timedelta
-from os import getenv
+from os import getenv, path
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -31,7 +32,8 @@ SECRET_KEY = getenv("SECRET_KEY")
 DEBUG = True if getenv("DEBUG") == "True" else False
 
 ALLOWED_HOSTS = ['0.0.0.0',
-                 'localhost']
+                 'localhost',
+                 '130.193.59.121']
 
 
 # Application definition
@@ -99,6 +101,14 @@ DATABASES = {
     }
 }
 
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'test_db.sqlite3'
+        }
+    }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -135,7 +145,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [BASE_DIR / "static/"]
+STATIC_ROOT = path.join(BASE_DIR, "static")
+# STATICFILES_DIRS = [BASE_DIR / "static/"]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

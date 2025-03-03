@@ -91,10 +91,27 @@ services:
     networks:
       - local
 
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - static_volume:/code/static
+    depends_on:
+      mypedia:
+        condition: service_healthy
+    networks:
+      - local
+      - global
+
 volumes:
   mypedia:
     driver: local
   db_mypedia:
+    driver: local
+  static_volume:
     driver: local
   redis:
 
