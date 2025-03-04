@@ -65,7 +65,12 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/mypedia:${{ github.sha }} .
+          docker compose build -t ${{ secrets.DOCKER_HUB_USERNAME }}/mypedia:${{ github.sha }} .
+        env:
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+
 
       - name: Push Docker image in Docker Hub
         run: |
