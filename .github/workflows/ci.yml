@@ -84,8 +84,8 @@ jobs:
       - name: Deploy to server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER }} << 'EOF'
-          docker pull ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}/mypedia:${{ github.sha }}
+          docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/mypedia:${{ github.sha }}
           docker stop mypedia || true
           docker rm mypedia || true
-          docker run -d --name mypedia -p 80:8000 ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}/mypedia:${{ github.sha }}
+          docker run -d --name mypedia -p 80:8000 ${{ secrets.DOCKER_HUB_USERNAME }}/mypedia:${{ github.sha }}
           EOF
