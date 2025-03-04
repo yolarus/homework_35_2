@@ -65,7 +65,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker compose build -t ${{ secrets.DOCKER_HUB_USERNAME }}/mypedia:${{ github.sha }} .
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/mypedia:${{ github.sha }} .
 
       - name: Push Docker image in Docker Hub
         run: |
