@@ -90,4 +90,10 @@ jobs:
 #          docker run -d --name mypedia -p 80:8000 ${{ secrets.DOCKER_HUB_USERNAME }}/mypedia:${{ github.sha }}
 #          EOF
         run: |
-          sshpass -p root ssh -v -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER }} "cd homework_35_2/ && git pull && docker compose up -d --build"
+          sshpass -p root ssh -v -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER }} "cd homework_35_2/ && git pull && docker compose up -d --build" << 'EOF'
+          docker container prune -f
+          docker image prune -f
+          docker network prune -f
+          docker volume prune -f
+          docker rmi mypedia
+          EOF
