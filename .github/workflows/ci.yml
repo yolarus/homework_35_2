@@ -83,10 +83,12 @@ jobs:
 
       - name: Deploy to server
         run: |
-          sshpass -p root ssh -v -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER }} "cd homework_35_2/ && git pull && docker compose up -d --build" << 'EOF'
+          sshpass -p root ssh -v -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER }} "cd homework_35_2/ && git pull" << 'EOF'
+          docker compose down
           docker container prune -f
           docker image prune -f
           docker network prune -f
           docker volume prune -f
           docker rmi mypedia
+          docker compose up -d --build
           EOF
