@@ -20,9 +20,3 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 COPY . .
 
 COPY . /code/
-
-RUN mkdir -p /code/static && chmod -R 755 /code/static
-
-EXPOSE 8000
-
-CMD ["sh", "-c", "python manage.py collectstatic --noinput && gunicorn config.wsgi: application --bind 0.0.0.0:8000"]
