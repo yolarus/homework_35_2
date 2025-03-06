@@ -9,6 +9,7 @@ services:
     command: ./docker_commands.sh
     volumes:
       - .:/code
+      - - static_volume:/code/staticfiles
     ports:
       - "8000:8000"
     env_file:
