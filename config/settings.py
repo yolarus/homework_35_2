@@ -33,15 +33,11 @@ DEBUG = True if getenv("DEBUG") == "True" else False
 ALLOWED_HOSTS = ['0.0.0.0',
                  'localhost',
                  '130.193.59.121',
-                 '130.193.59.121:8000',
-                 'django',
-                 'django:8000']
+                 'django']
 CSRF_TRUSTED_ORIGINS = ['http://0.0.0.0',
                         'http://localhost',
                         'http://130.193.59.121',
-                        'http://130.193.59.121:8000',
-                        'http://django',
-                        'http://django:8000']
+                        'http://django']
 
 # Application definition
 
