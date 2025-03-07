@@ -9,6 +9,7 @@ services:
     command: ./docker_commands.sh
     volumes:
       - .:/code
+      - static_volume:/code/staticfiles
     ports:
       - "8000:8000"
     env_file:
@@ -16,9 +17,7 @@ services:
     depends_on:
       db_mypedia:
         condition: service_healthy
-      celery:
-        condition: service_started
-      celery_beat:
+      redis:
         condition: service_started
     networks:
       - local
@@ -70,7 +69,7 @@ services:
       - .:/code
     command: bash -c "celery -A config worker -l INFO -S django"
     depends_on:
-      - redis
+      - mypedia
     networks:
       - local
       - global
@@ -87,14 +86,31 @@ services:
       - .:/code
     command: bash -c "celery -A config beat -l info -S django"
     depends_on:
-      - redis
+      - mypedia
     networks:
       - local
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - static_volume:/code/staticfiles
+    depends_on:
+      - celery
+      - celery_beat
+    networks:
+      - local
+      - global
 
 volumes:
   mypedia:
     driver: local
   db_mypedia:
+    driver: local
+  static_volume:
     driver: local
   redis:
 
